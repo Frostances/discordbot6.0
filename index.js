@@ -1177,7 +1177,7 @@ const ALIASES = {
      rw: 'rewind',
      dc: 'disconnect',
      leave: 'disconnect',
-     stop: 'disconnect',
+     // stop handled directly by music.js
      np: 'nowplaying',
      loop: 'repeat',
      // Fake Permissions
@@ -1358,9 +1358,22 @@ client.on('messageCreate', async (message) => {
 
         // ── Help ──
         if (command === 'help') return handleHelp(message, args, client, prefix);
+
+        // Config commands with no args should show their module config, not help
+        const CONFIG_BARE = new Set([
+            'level', 'levels', 'log', 'config', 'settings', 'ticket', 'welcome',
+            'goodbye', 'boosts', 'economy', 'levelupmsg', 'module',
+            'customize', 'pagination', 'enablecommand', 'disablecommand',
+            'copydisabled', 'enableevent', 'disableevent', 'enablemodule',
+            'disablemodule', 'ignore', 'pin', 'unpin', 'pins', 'webhook',
+            'fakepermissions', 'roleplay', 'afk', 'godadmin', 'autoresponder',
+            'counter', 'starboard', 'clownboard', 'seticon', 'setsplashbackground',
+            'setbanner', 'voicemaster', 'musicstats'
+        ]);
+
          // A bare command/category that has a browsable guide opens that guide
          // without affecting commands that have a meaningful no-argument action.
-         if (!args.length && shouldShowHelpForCommand(command, prefix)) {
+         if (!args.length && !CONFIG_BARE.has(command) && shouldShowHelpForCommand(command, prefix)) {
              return handleHelp(message, [command], client, prefix);
          }
 
@@ -1414,7 +1427,7 @@ client.on('messageCreate', async (message) => {
         if (command === 'antiraid') return handleAntiRaidCommand(message, args);
 
         // ── Levels ──
-        if (command === 'levels') return handleLevelsCommand(message, args, client);
+        if (command === 'level' || command === 'levels') return handleLevelsCommand(message, args, client);
 
         if (command === 'setxp') {
             if (!isStaffOrAdmin(message.member)) return message.reply('❌ No permission.');
