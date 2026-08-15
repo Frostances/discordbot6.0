@@ -874,7 +874,7 @@ const HELP_SUPPLEMENTS = [
   { name: 'reactionrole', aliases: ['rr'], category: 'utility', description: 'Configure emoji reaction roles.', usage: '.reactionrole <action>', subcommands: ['add <message-id> <emoji> @role', 'remove <message-id> <emoji>', 'list', 'clear <message-id>'] },
   { name: 'giveaway', aliases: ['gw2'], category: 'utility', description: 'Create and manage giveaways.', usage: '.giveaway <action>', subcommands: ['start <time> <winners> <prize>', 'end <id>', 'reroll <id>', 'cancel <id>', 'list', 'edit <id>'] },
   { name: 'autorole', aliases: ['ar2'], category: 'utility', description: 'Configure automatic roles.', usage: '.autorole <action>', subcommands: ['add @role', 'remove @role', 'list'] },
-  { name: 'buttonrole', aliases: ['br2'], category: 'utility', description: 'Configure button roles.', usage: '.buttonrole <action>', subcommands: ['add <message-id> <label> @role', 'remove <message-id> <label>', 'list'] }
+  { name: 'buttonrole', aliases: ['br2'], category: 'utility', description: 'Configure button roles.', usage: '.buttonrole <action>', subcommands: ['add <message-id> <label> @role', 'remove <message-id> <label>', 'list'] },
 
   // ── Socials ──
   { name: 'tiktok', category: 'socials', description: 'Get TikTok profile info or manage feeds.', usage: '.tiktok <username>', subcommands: ['list', 'add #channel <username>', 'remove #channel <username>', 'message <username> <text>', 'message view <username>', 'live <username> <on|off>'] },
