@@ -556,6 +556,105 @@ function buildSlashCommands() {
       .addSubcommand(s => s.setName('reset').setDescription('Reset clownboard configuration'))
       .addSubcommand(s => s.setName('config').setDescription('View clownboard settings')),
 
+    // ══════════════════════════════════════════════════════════
+    // SOCIALS SLASH COMMANDS — append inside buildSlashCommands() before the final .map(c => c.toJSON())
+    // ══════════════════════════════════════════════════════════
+
+     // ── TikTok ──
+     new SlashCommandBuilder()
+       .setName('tiktok').setDescription('TikTok profile and feed management')
+       .addSubcommand(s => s.setName('profile').setDescription('Get TikTok profile info').addStringOption(o => o.setName('username').setDescription('TikTok username').setRequired(true)))
+       .addSubcommand(s => s.setName('list').setDescription('List all TikTok feeds'))
+       .addSubcommand(s => s.setName('add').setDescription('Add a TikTok feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('remove').setDescription('Remove a TikTok feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('message').setDescription('Set message for new posts').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)).addStringOption(o => o.setName('message').setDescription('Message text').setRequired(true)))
+       .addSubcommand(s => s.setName('message_view').setDescription('View message for new posts').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('live').setDescription('Toggle live notifications').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)).addStringOption(o => o.setName('setting').setDescription('on or off').setRequired(true).addChoices({name:'On',value:'on'},{name:'Off',value:'off'}))),
+
+     // ── Twitter ──
+     new SlashCommandBuilder()
+       .setName('twitter').setDescription('Twitter/X profile and feed management')
+       .addSubcommand(s => s.setName('profile').setDescription('Get Twitter profile info').addStringOption(o => o.setName('handle').setDescription('Twitter handle').setRequired(true)))
+       .addSubcommand(s => s.setName('list').setDescription('List all Twitter feeds'))
+       .addSubcommand(s => s.setName('add').setDescription('Add a Twitter feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('handle').setDescription('Handle').setRequired(true)))
+       .addSubcommand(s => s.setName('remove').setDescription('Remove a Twitter feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('handle').setDescription('Handle').setRequired(true)))
+       .addSubcommand(s => s.setName('message').setDescription('Set message for new tweets').addStringOption(o => o.setName('handle').setDescription('Handle').setRequired(true)).addStringOption(o => o.setName('message').setDescription('Message text').setRequired(true)))
+       .addSubcommand(s => s.setName('message_view').setDescription('View message for new tweets').addStringOption(o => o.setName('handle').setDescription('Handle').setRequired(true)))
+       .addSubcommand(s => s.setName('retweets').setDescription('Toggle retweets').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('handle').setDescription('Handle').setRequired(true)).addStringOption(o => o.setName('setting').setDescription('on or off').setRequired(true).addChoices({name:'On',value:'on'},{name:'Off',value:'off'}))),
+
+     // ── Fortnite ──
+     new SlashCommandBuilder()
+       .setName('fortnite').setDescription('Fortnite Item Shop and cosmetics')
+       .addSubcommand(s => s.setName('shop').setDescription('Show daily shop'))
+       .addSubcommand(s => s.setName('item').setDescription('Search for an item').addStringOption(o => o.setName('name').setDescription('Item name').setRequired(true)))
+       .addSubcommand(s => s.setName('watch').setDescription('Watch an item').addStringOption(o => o.setName('item').setDescription('Item name').setRequired(true)))
+       .addSubcommand(s => s.setName('watch_list').setDescription('List watched items'))
+       .addSubcommand(s => s.setName('set_shop_channel').setDescription('Set shop update channel').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)))
+       .addSubcommand(s => s.setName('set_shop_ping').setDescription('Set shop ping role').addRoleOption(o => o.setName('role').setDescription('Role').setRequired(true)))
+       .addSubcommand(s => s.setName('set_shop_voting').setDescription('Toggle shop voting').addStringOption(o => o.setName('setting').setDescription('on or off').setRequired(true).addChoices({name:'On',value:'on'},{name:'Off',value:'off'}))),
+
+     // ── YouTube ──
+     new SlashCommandBuilder()
+       .setName('youtube').setDescription('YouTube search and feed management')
+       .addSubcommand(s => s.setName('search').setDescription('Search YouTube').addStringOption(o => o.setName('query').setDescription('Search query').setRequired(true)))
+       .addSubcommand(s => s.setName('list').setDescription('List all YouTube feeds'))
+       .addSubcommand(s => s.setName('add').setDescription('Add a YouTube feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('url').setDescription('Channel URL').setRequired(true)))
+       .addSubcommand(s => s.setName('remove').setDescription('Remove a YouTube feed').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('url').setDescription('Channel URL').setRequired(true)))
+       .addSubcommand(s => s.setName('message').setDescription('Set notification message').addStringOption(o => o.setName('url').setDescription('Channel URL').setRequired(true)).addStringOption(o => o.setName('message').setDescription('Message text').setRequired(true)))
+       .addSubcommand(s => s.setName('message_view').setDescription('View notification message').addStringOption(o => o.setName('url').setDescription('Channel URL').setRequired(true))),
+
+     // ── Twitch ──
+     new SlashCommandBuilder()
+       .setName('twitch').setDescription('Twitch profile and stream notifications')
+       .addSubcommand(s => s.setName('profile').setDescription('Get Twitch profile').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('list').setDescription('List all Twitch feeds'))
+       .addSubcommand(s => s.setName('add').setDescription('Add stream notifications').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('streamer').setDescription('Streamer').setRequired(true)))
+       .addSubcommand(s => s.setName('remove').setDescription('Remove stream notifications').addChannelOption(o => o.setName('channel').setDescription('Channel').setRequired(true)).addStringOption(o => o.setName('streamer').setDescription('Streamer').setRequired(true)))
+       .addSubcommand(s => s.setName('message').setDescription('Set notification message').addStringOption(o => o.setName('streamer').setDescription('Streamer').setRequired(true)).addStringOption(o => o.setName('message').setDescription('Message text').setRequired(true)))
+       .addSubcommand(s => s.setName('message_view').setDescription('View notification message').addStringOption(o => o.setName('streamer').setDescription('Streamer').setRequired(true))),
+
+     // ── Roblox ──
+     new SlashCommandBuilder()
+       .setName('roblox').setDescription('Roblox profile and tools')
+       .addSubcommand(s => s.setName('profile').setDescription('Get Roblox profile').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('outfits').setDescription('View outfits').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('check').setDescription('Check inventory').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)).addStringOption(o => o.setName('asset').setDescription('Asset ID or name').setRequired(true)))
+       .addSubcommand(s => s.setName('devex').setDescription('Convert Robux to USD').addIntegerOption(o => o.setName('robux').setDescription('Amount').setRequired(true)))
+       .addSubcommand(s => s.setName('item').setDescription('Search limited item').addStringOption(o => o.setName('query').setDescription('Search query').setRequired(true)))
+       .addSubcommand(s => s.setName('inventory').setDescription('View inventory').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)))
+       .addSubcommand(s => s.setName('template').setDescription('Download asset template').addStringOption(o => o.setName('asset_id').setDescription('Asset ID').setRequired(true)))
+       .addSubcommand(s => s.setName('fromdiscord').setDescription('Get Roblox from Discord ID').addStringOption(o => o.setName('user_id').setDescription('Discord User ID').setRequired(true)))
+       .addSubcommand(s => s.setName('todiscord').setDescription('Get Discord from Roblox').addStringOption(o => o.setName('username').setDescription('Username').setRequired(true))),
+
+     // ── CashApp ──
+     new SlashCommandBuilder()
+       .setName('cashapp').setDescription('Retrieve CashApp profile info')
+       .addStringOption(o => o.setName('username').setDescription('CashApp $username').setRequired(true)),
+
+     // ── Xbox ──
+     new SlashCommandBuilder()
+       .setName('xbox').setDescription('Get Xbox gamertag info')
+       .addStringOption(o => o.setName('gamertag').setDescription('Gamertag').setRequired(true)),
+
+     // ── Snapchat ──
+     new SlashCommandBuilder()
+       .setName('snapchat').setDescription('Get Snapchat bitmoji and QR')
+       .addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)),
+
+     new SlashCommandBuilder()
+       .setName('snapchatstory').setDescription('Get Snapchat stories')
+       .addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)),
+
+     // ── Valorant ──
+     new SlashCommandBuilder()
+       .setName('valorant').setDescription('Get Valorant player info')
+       .addStringOption(o => o.setName('user').setDescription('Name#Tag').setRequired(true)),
+
+     // ── Minecraft ──
+     new SlashCommandBuilder()
+       .setName('minecraft').setDescription('Get Minecraft profile info')
+       .addStringOption(o => o.setName('username').setDescription('Username').setRequired(true)),
+
   ].map(c => c.toJSON());
 }
 

@@ -31,6 +31,7 @@ const CATEGORY_META = {
   mute:         { emoji: '🔇', label: 'Mute' },
   nicknames:    { emoji: '📝', label: 'Nicknames' },
   giveaways:    { emoji: '🎁', label: 'Giveaways' },
+  socials: { emoji: '🌐', label: 'Socials' },
 };
 
 const HELP_OVERRIDES = {
@@ -874,6 +875,21 @@ const HELP_SUPPLEMENTS = [
   { name: 'giveaway', aliases: ['gw2'], category: 'utility', description: 'Create and manage giveaways.', usage: '.giveaway <action>', subcommands: ['start <time> <winners> <prize>', 'end <id>', 'reroll <id>', 'cancel <id>', 'list', 'edit <id>'] },
   { name: 'autorole', aliases: ['ar2'], category: 'utility', description: 'Configure automatic roles.', usage: '.autorole <action>', subcommands: ['add @role', 'remove @role', 'list'] },
   { name: 'buttonrole', aliases: ['br2'], category: 'utility', description: 'Configure button roles.', usage: '.buttonrole <action>', subcommands: ['add <message-id> <label> @role', 'remove <message-id> <label>', 'list'] }
+
+  // ── Socials ──
+  { name: 'tiktok', category: 'socials', description: 'Get TikTok profile info or manage feeds.', usage: '.tiktok <username>', subcommands: ['list', 'add #channel <username>', 'remove #channel <username>', 'message <username> <text>', 'message view <username>', 'live <username> <on|off>'] },
+  { name: 'twitter', category: 'socials', description: 'Get Twitter/X profile info or manage feeds.', usage: '.twitter <handle>', subcommands: ['list', 'add #channel <handle>', 'remove #channel <handle>', 'message <handle> <text>', 'message view <handle>', 'retweets #channel <handle> <on|off>'] },
+  { name: 'fortnite', category: 'socials', description: 'View Fortnite Item Shop or item info.', usage: '.fortnite', subcommands: ['shop #channel', 'shop ping @role', 'shop voting <on|off>', 'item <name>', 'watch <item>', 'watch list'] },
+  { name: 'fortniteshop', category: 'socials', description: 'Show the daily Fortnite Item Shop.', usage: '.fortniteshop' },
+  { name: 'youtube', category: 'socials', description: 'Search YouTube or manage channel feeds.', usage: '.youtube <search>', subcommands: ['list', 'add #channel <url>', 'remove #channel <url>', 'message <url> <text>', 'message view <url>'] },
+  { name: 'twitch', category: 'socials', description: 'Check a Twitch profile or manage stream notifications.', usage: '.twitch <username>', subcommands: ['list', 'add #channel <streamer>', 'remove #channel <streamer>', 'message <streamer> <text>', 'message view <streamer>'] },
+  { name: 'roblox', category: 'socials', description: 'Get Roblox user info or manage lookups.', usage: '.roblox <username>', subcommands: ['fromdiscord <user-id>', 'outfits <username>', 'check <username> <asset>', 'devex <robux>', 'item <query>', 'inventory <username>', 'template <asset-id>', 'todiscord <username>'] },
+  { name: 'cashapp', category: 'socials', description: 'Retrieve CashApp profile info.', usage: '.cashapp <username>' },
+  { name: 'xbox', category: 'socials', description: 'Get Xbox gamertag info.', usage: '.xbox <gamertag>' },
+  { name: 'snapchatstory', category: 'socials', description: 'Get Snapchat stories for a user.', usage: '.snapchatstory <username>' },
+  { name: 'snapchat', category: 'socials', description: 'Get Snapchat bitmoji and QR code.', usage: '.snapchat <username>' },
+  { name: 'valorant', category: 'socials', description: 'Get Valorant player info.', usage: '.valorant <name#tag>' },
+  { name: 'minecraft', category: 'socials', description: 'Get Minecraft profile info.', usage: '.minecraft <username>' },
 ,
   // ── Server ──
   { name: 'serverinfo', aliases: ['si'], category: 'server', description: 'View detailed server information.', usage: '.serverinfo' },

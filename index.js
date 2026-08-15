@@ -12,6 +12,7 @@
     const { ActivityType } = require('discord.js');
     const { applyMutePermsToNewChannel } = require('./modules/mute');
     const { updateSeen } = require('./modules/information');
+    const { handleSocialsCommand, SOCIALS_COMMANDS } = require('./modules/socials');
 
     // ══════════════════════════════════════════════════════════
     // INFORMATION COMMANDS (from modules/information.js)

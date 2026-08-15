@@ -21,5 +21,6 @@
     "opusscript": "^0.0.8",
     "shoukaku": "^4.3.0",
     "undici": "^8.9.0"
+    "axios": "^1.7.2"
   }
 }
