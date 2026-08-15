@@ -675,7 +675,7 @@
     "1007616729255522394": {
       "guesswordWins": 0,
       "swearCount": 2,
-      "vcTotalMinutes": 130,
+      "vcTotalMinutes": 182,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -738,8 +738,8 @@
     },
     "1251828648969895949": {
       "guesswordWins": 0,
-      "swearCount": 0,
-      "vcTotalMinutes": 0,
+      "swearCount": 1,
+      "vcTotalMinutes": 65,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -831,6 +831,62 @@
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
+    },
+    "1451905932887068742": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "411916947773587456": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 66,
+      "warnings": [],
+      "streakCount": 0,
+      "lastStreakDate": null
+    },
+    "1530257963061612564": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "745116273981259888": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 45,
+      "warnings": [],
+      "streakCount": 0,
+      "lastStreakDate": null
+    },
+    "884803088806969365": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "1364995561979121736": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "761825249243168768": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
     }
   },
   "persistentData": {
@@ -850,11 +906,8 @@
       "1529700981665693810": 1786755150468,
       "513423712582762502": 1786788192988,
       "944016826751389717": 1786788603864,
-      "411916947773587456": 1786797112669,
       "1533229547296784391": 1786791808708,
-      "1251828648969895949": 1786797086473,
-      "745116273981259888": 1786799594999,
-      "1007616729255522394": 1786799906103
+      "745116273981259888": 1786802322563
     },
     "staffRoles": [],
     "voiceMaster": {},

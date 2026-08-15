@@ -361,6 +361,7 @@ const HELP_OVERRIDES = {
       { name: 'reset', description: 'Reset bot customization.' },
     ],
   },
+  
   pagination: {
     category: 'configuration',
     helpOnBare: false,

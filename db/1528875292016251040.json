@@ -1201,7 +1201,7 @@
   },
   "users": {
     "1410668779347771402": {
-      "xp": 20538,
+      "xp": 21248,
       "level": 8,
       "balance": 0,
       "bank": 0,
@@ -1213,7 +1213,7 @@
       "lastCrime": null
     },
     "1278713831345881170": {
-      "xp": 33525,
+      "xp": 33784,
       "level": 9,
       "balance": 0,
       "bank": 0,
@@ -2245,17 +2245,17 @@
           "2026-08-10": 9,
           "2026-08-12": 32,
           "2026-08-13": 76,
-          "2026-08-15": 65
+          "2026-08-15": 83
         },
         "weekly": {
           "2026-07-27": 33,
           "2026-08-03": 8,
-          "2026-08-10": 182
+          "2026-08-10": 200
         },
         "monthly": {
-          "2026-08": 223
+          "2026-08": 241
         },
-        "total": 223
+        "total": 241
       },
       "1278713831345881170": {
         "daily": {
@@ -2267,17 +2267,17 @@
           "2026-08-07": 255,
           "2026-08-08": 275,
           "2026-08-09": 71,
-          "2026-08-15": 49
+          "2026-08-15": 52
         },
         "weekly": {
           "2026-07-27": 131,
           "2026-08-03": 1092,
-          "2026-08-10": 49
+          "2026-08-10": 52
         },
         "monthly": {
-          "2026-08": 1272
+          "2026-08": 1275
         },
-        "total": 1272
+        "total": 1275
       },
       "1408853277470097568": {
         "daily": {
@@ -2661,12 +2661,12 @@
     }
   },
   "lastSeen": {
-    "1278713831345881170": 1786798240250,
+    "1278713831345881170": 1786806142131,
     "1408853277470097568": 1786226128256,
     "1371931756692897893": 1786238783533,
     "820324513488699404": 1786048518357,
     "1534648427135369226": 1786220285276,
-    "1410668779347771402": 1786800026158
+    "1410668779347771402": 1786806226388
   },
   "antinuke": {
     "enabled": true,
@@ -2828,7 +2828,7 @@
   },
   "autoresponders": {},
   "commandUsage": {
-    "ping": 5,
+    "ping": 14,
     "antiraid": 1,
     "autoresponder": 21,
     "role": 31,
@@ -2838,7 +2838,7 @@
     "strip": 2,
     "stripstaff": 4,
     "bt": 1,
-    "help": 26,
+    "help": 27,
     "levels": 7,
     "ask": 10,
     "who": 1,
@@ -2867,7 +2867,7 @@
     "fastforward": 2,
     "tts": 1,
     "purge": 12,
-    "customize": 6,
+    "customize": 9,
     "ce": 4,
     "ec": 4,
     "quotwe": 1,
@@ -2899,7 +2899,9 @@
     "pin": 1,
     "logs": 2,
     "logging": 2,
-    "sticker": 3
+    "sticker": 3,
+    "servercustomize": 6,
+    "sc": 1
   },
   "economy": {
     "enabled": true,
@@ -2980,7 +2982,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 79,
+          "messagesSent": 82,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3016,12 +3018,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",quote",
-          "lastTime": 1786798240251,
+          "lastContent": ",servercustomize view",
+          "lastTime": 1786806142155,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786798240251
+          "windowStart": 1786806142155
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 250,
@@ -3096,7 +3098,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 157,
+          "messagesSent": 168,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3133,12 +3135,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",botstats",
-          "lastTime": 1786800026166,
+          "lastContent": ",servercustomize avatar https://cdn.discordapp.com/attachments/1528875294952521975/1538201359210254467/Cyriane_on_TikTok.jpg?ex=6a81d126&is=6a807fa6&hm=3f4b713fc3436a53862ae84cf9a3ad03d9d6a621b9871191372a6a49082cb2b6&",
+          "lastTime": 1786806226389,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786800026166
+          "windowStart": 1786806226389
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 180,
