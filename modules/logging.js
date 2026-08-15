@@ -120,13 +120,41 @@ async function handleLogCommand(message, args) {
 
     // ── log (no args) ──
     if (!sub) {
-        const channels = Object.entries(cfg.channels).map(([id, ch]) => {
-            const chObj = message.guild.channels.cache.get(id);
-            return `• <#${id}> — ${ch.events.join(', ') || 'none'}`;
-        });
-        return message.reply({ embeds: [mkInfo('Logging Configuration',
-            channels.length ? channels.join('\n') : 'No logging channels configured.\n\nUse `,log add #channel <event>` to set up logging.'
-        )] });
+        const embed = new EmbedBuilder().setTitle('📋 Logging Configuration').setColor('#5865F2');
+        let desc = '';
+
+        const enabledEvents = [];
+        const disabledEvents = [];
+
+        for (const event of ALL_EVENTS) {
+            const enabledIn = Object.entries(cfg.channels)
+                .filter(([, ch]) => ch.events.includes(event))
+                .map(([id]) => {
+                    const chObj = message.guild.channels.cache.get(id);
+                    return chObj ? `<#${id}>` : `#${id}`;
+                });
+
+            if (enabledIn.length) {
+                enabledEvents.push(`🟢 **${event}** → ${enabledIn.join(', ')}`);
+            } else {
+                disabledEvents.push(`🔴 **${event}**`);
+            }
+        }
+
+        if (enabledEvents.length) {
+            desc += '**Enabled Events:**\n' + enabledEvents.join('\n') + '\n\n';
+        }
+        if (disabledEvents.length) {
+            desc += '**Disabled Events:**\n' + disabledEvents.join('\n') + '\n\n';
+        }
+
+        const ignoredChs = cfg.ignored.channels.map(id => `<#${id}>`).join(', ') || 'None';
+        const ignoredMems = cfg.ignored.members.map(id => `<@${id}>`).join(', ') || 'None';
+        desc += `**Ignored Channels:** ${ignoredChs}\n**Ignored Members:** ${ignoredMems}`;
+
+        embed.setDescription(desc);
+        embed.setFooter({ text: 'Use ,log add #channel <event> to configure' });
+        return message.reply({ embeds: [embed] });
     }
 
     // ── log add #channel [event] ──

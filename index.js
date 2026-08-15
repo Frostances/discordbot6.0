@@ -186,7 +186,6 @@ const { handleGiveawayCommand, handleGiveawayButton,
         restoreGiveawayTimers,
         trackGiveawayMessage,
         trackGiveawayVoice }                            = require('./modules/giveaways');
-const { hasDiscordPerm }                                = require('./modules/helpers');
 const { handleTopVcCommand, trackTopVcVoiceState,
         refreshTopVcLeaderboards, handleTopVcClear }    = require('./modules/topvc');
 const { handleVoiceTimeStats, handleMessageStats,

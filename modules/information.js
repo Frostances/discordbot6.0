@@ -507,22 +507,34 @@ async function handleSticker(message, args) {
   }
 
   if (sub === 'tag') {
-    if (!message.member.permissions.has(PermissionFlagsBits.ManageExpressions) || !message.member.permissions.has(PermissionFlagsBits.ManageGuild))
-      return message.reply({ embeds: [error('Permission Denied', 'You need **Manage Expressions** and **Manage Server**.')] });
+    if (!message.member.permissions.has(PermissionFlagsBits.ManageExpressions))
+      return message.reply({ embeds: [error('Permission Denied', 'You need **Manage Expressions**.')] });
 
-    const vanity = guild.vanityURLCode;
-    if (!vanity) return message.reply({ embeds: [error('No Vanity', 'This server does not have a vanity URL.')] });
+    const vanity = args[1];
+    if (!vanity) return message.reply({ embeds: [error('Missing Vanity', 'Usage: `,sticker tag <vanity>`')] });
 
     const stickers = await guild.stickers.fetch();
     let tagged = 0;
-    for (const [, s] of stickers) {
-      if (!s.name.includes(vanity)) {
-        const newName = `${s.name}_${vanity}`.slice(0, 30);
-        await s.edit({ name: newName }).catch(() => {});
+
+    for (const [, sticker] of stickers) {
+      // Skip stickers that already have this vanity
+      if (sticker.name.includes(` /${vanity}`)) continue;
+
+      // Remove any existing vanity suffix first (clean up old format too)
+      let baseName = sticker.name.replace(/ \/[^ ]+$/, '').replace(/_[^ ]+$/, '');
+
+      // Build new name: "BaseName /vanity"
+      const newName = `${baseName} /${vanity}`.slice(0, 30); // Discord limit is 30 chars
+
+      try {
+        await sticker.edit({ name: newName });
         tagged++;
+      } catch (err) {
+        console.error(`[Sticker Tag] Failed to tag ${sticker.name}:`, err.message);
       }
     }
-    return message.reply({ embeds: [success('Sticker Tag', `Tagged **${tagged}** sticker(s) with vanity \`${vanity}\`.`)] });
+
+    return message.reply({ embeds: [success('Sticker Tag', `Tagged **${tagged}** sticker(s) with \`/${vanity}\`.`)] });
   }
 
   if (sub === 'add') {

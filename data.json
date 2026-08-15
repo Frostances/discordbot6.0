@@ -675,7 +675,7 @@
     "1007616729255522394": {
       "guesswordWins": 0,
       "swearCount": 2,
-      "vcTotalMinutes": 0,
+      "vcTotalMinutes": 130,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -706,7 +706,7 @@
     },
     "1530445696795283506": {
       "guesswordWins": 0,
-      "swearCount": 0,
+      "swearCount": 5,
       "vcTotalMinutes": 0,
       "warnings": [],
       "streakCount": 1,
@@ -722,8 +722,8 @@
     },
     "1529075135225659392": {
       "guesswordWins": 0,
-      "swearCount": 0,
-      "vcTotalMinutes": 0,
+      "swearCount": 1,
+      "vcTotalMinutes": 5,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -767,6 +767,62 @@
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
+    },
+    "1505994919368720434": {
+      "guesswordWins": 0,
+      "swearCount": 4,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "1528994270260756530": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 1,
+      "warnings": [],
+      "streakCount": 0,
+      "lastStreakDate": null
+    },
+    "1480134518169014404": {
+      "guesswordWins": 0,
+      "swearCount": 1,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "1535002540536496128": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "1165627226969096293": {
+      "guesswordWins": 0,
+      "swearCount": 1,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "884359030254997534": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
+    },
+    "1535267061385662514": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
     }
   },
   "persistentData": {
@@ -784,12 +840,13 @@
       "1100291518889197568": 1786754407835,
       "370307593442295818": 1786755147597,
       "1529700981665693810": 1786755150468,
-      "1007616729255522394": 1786788159934,
       "513423712582762502": 1786788192988,
       "944016826751389717": 1786788603864,
-      "1251828648969895949": 1786791487490,
-      "411916947773587456": 1786791530973,
-      "1533229547296784391": 1786791808708
+      "411916947773587456": 1786797112669,
+      "1533229547296784391": 1786791808708,
+      "1505994919368720434": 1786796310826,
+      "1530445696795283506": 1786796595114,
+      "1251828648969895949": 1786797086473
     },
     "staffRoles": [],
     "voiceMaster": {},

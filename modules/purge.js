@@ -20,8 +20,8 @@ function isBulkable(msg) {
 //  CORE EXECUTOR  (completely silent)
 // ══════════════════════════════════════════════════════════
 async function executePurge(ctx, channel, limit, filterFn) {
-    // Delete the invoking message silently
-    if (ctx.deletable !== false) await ctx.delete?.().catch(() => {});
+    // Delete the invoking message silently (only if it's a real message, not interaction)
+    if (ctx.deletable && typeof ctx.delete === 'function') await ctx.delete().catch(() => {});
 
     const hardMax = Math.min(limit, 10000);
     let totalDeleted = 0;
@@ -72,8 +72,9 @@ const NAMED = {
 //  MAIN PURGE HANDLER
 // ══════════════════════════════════════════════════════════
 async function handlePurge(ctx, args) {
-    const { isStaffOrAdmin } = require('./helpers');
-    if (!isStaffOrAdmin(ctx.member)) return ctx.reply({ content: '❌ No permission.' });
+    const { isStaffOrAdmin, hasDiscordPerm } = require('./helpers');
+    if (!isStaffOrAdmin(ctx.member) && !hasDiscordPerm(ctx.member, 'ManageMessages')) 
+        return ctx.reply({ content: '❌ You need **Manage Messages** or staff/admin permissions.' });
 
     const channel = ctx.channel;
     const sub     = args[0]?.toLowerCase();
@@ -87,7 +88,7 @@ async function handlePurge(ctx, args) {
     // ── .purge @user [amount] ──
     if (ctx.mentions?.users?.size) {
         const target = ctx.mentions.users.first();
-        const n      = parseInt(args.find(a => !isNaN(parseInt(a)))) || 100;
+        const n      = parseInt(args.find(a => /^\d+$/.test(a))) || 100;
         return executePurge(ctx, channel, n, m => m.author.id === target.id);
     }
 
@@ -105,7 +106,7 @@ async function handlePurge(ctx, args) {
     // ── .purge upto <msgId> ──
     if (sub === 'upto') {
         const msgId = args[1];
-        if (!msgId?.match(/^\d+$/)) return ctx.reply({ content: '❌ Provide a message ID: `.purge upto <id>`' });
+        if (!msgId?.match(/^\d+$/)) return ctx.reply({ content: '❌ Provide a message ID: `,purge upto <id>`' });
         await ctx.delete?.().catch(() => {});
         const msgs = await channel.messages.fetch({ limit: 100 }).catch(() => new Map());
         const idx  = [...msgs.keys()].indexOf(msgId);
@@ -143,10 +144,16 @@ async function handlePurge(ctx, args) {
     if (sub === 'between') {
         const id1 = args[1], id2 = args[2];
         if (!id1?.match(/^\d+$/) || !id2?.match(/^\d+$/))
-            return ctx.reply({ content: '❌ Usage: `.purge between <msgId1> <msgId2>`' });
+            return ctx.reply({ content: '❌ Usage: `,purge between <msgId1> <msgId2>`' });
         await ctx.delete?.().catch(() => {});
         const msgs  = await channel.messages.fetch({ limit: BULK_MAX, after: id1 }).catch(() => new Map());
-        const range = new Map([...msgs].filter(([id]) => BigInt(id) < BigInt(id2) && isBulkable(msgs.get(id))));
+        // Handle both orderings: id1 < id2 or id2 < id1
+        const minId = BigInt(id1) < BigInt(id2) ? BigInt(id1) : BigInt(id2);
+        const maxId = BigInt(id1) < BigInt(id2) ? BigInt(id2) : BigInt(id1);
+        const range = new Map([...msgs].filter(([id]) => {
+            const bid = BigInt(id);
+            return bid > minId && bid < maxId && isBulkable(msgs.get(id));
+        }));
         if (range.size) await channel.bulkDelete(range, true).catch(() => {});
         return;
     }
@@ -155,7 +162,7 @@ async function handlePurge(ctx, args) {
     if (sub === 'contains') {
         const n    = parseInt(args[1]) || 100;
         const text = args.slice(2).join(' ').toLowerCase();
-        if (!text) return ctx.reply({ content: '❌ Usage: `.purge contains <amount> <text>`' });
+        if (!text) return ctx.reply({ content: '❌ Usage: `,purge contains <amount> <text>`' });
         return executePurge(ctx, channel, n, m => m.content.toLowerCase().includes(text));
     }
 
@@ -163,7 +170,7 @@ async function handlePurge(ctx, args) {
     if (sub === 'startswith') {
         const n    = parseInt(args[1]) || 100;
         const text = args.slice(2).join(' ').toLowerCase();
-        if (!text) return ctx.reply({ content: '❌ Usage: `.purge startswith <amount> <text>`' });
+        if (!text) return ctx.reply({ content: '❌ Usage: `,purge startswith <amount> <text>`' });
         return executePurge(ctx, channel, n, m => m.content.toLowerCase().startsWith(text));
     }
 
@@ -171,7 +178,7 @@ async function handlePurge(ctx, args) {
     if (sub === 'endswith') {
         const n    = parseInt(args[1]) || 100;
         const text = args.slice(2).join(' ').toLowerCase();
-        if (!text) return ctx.reply({ content: '❌ Usage: `.purge endswith <amount> <text>`' });
+        if (!text) return ctx.reply({ content: '❌ Usage: `,purge endswith <amount> <text>`' });
         return executePurge(ctx, channel, n, m => m.content.toLowerCase().endsWith(text));
     }
 
@@ -186,21 +193,22 @@ async function handlePurge(ctx, args) {
     return ctx.reply({ embeds: [base(COLORS.primary).setTitle('🗑️ Purge Commands')
         .setDescription([
             '**Basic (silent — deletes messages with no response):**',
-            '`.purge <amount>` — delete last N messages (max 10,000)',
-            '`.purge @user [amount]` — delete messages from a user',
+            '`,purge <amount>` — delete last N messages (max 10,000)',
+            '`,purge @user [amount]` — delete messages from a user',
             '',
             '**Filters:**',
-            '`.purge bots` `.purge humans` `.purge links` `.purge embeds`',
-            '`.purge files` `.purge images` `.purge emoji` `.purge emotes`',
-            '`.purge stickers` `.purge mentions` `.purge reactions` `.purge activity`',
+            '`,purge bots` `,purge humans` `,purge links` `,purge embeds`',
+            '`,purge files` `,purge images` `,purge emoji` `,purge emotes`',
+            '`,purge stickers` `,purge mentions` `,purge reactions` `,purge activity`',
             '',
             '**Text:**',
-            '`.purge contains <n> <text>` `.purge startswith <n> <text>` `.purge endswith <n> <text>`',
+            '`,purge contains <n> <text>` `,purge startswith <n> <text>` `,purge endswith <n> <text>`',
             '',
             '**By Position:**',
-            '`.purge upto <msgId>` `.purge before <msgId> [n]`',
-            '`.purge after <msgId> [n]` `.purge between <id1> <id2>`',
+            '`,purge upto <msgId>` `,purge before <msgId> [n]`',
+            '`,purge after <msgId> [n]` `,purge between <id1> <id2>`',
         ].join('\n'))] });
 }
+
 
 module.exports = { handlePurge, executePurge };

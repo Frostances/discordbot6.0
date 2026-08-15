@@ -1201,7 +1201,7 @@
   },
   "users": {
     "1410668779347771402": {
-      "xp": 20083,
+      "xp": 20330,
       "level": 7,
       "balance": 0,
       "bank": 0,
@@ -1213,7 +1213,7 @@
       "lastCrime": null
     },
     "1278713831345881170": {
-      "xp": 33327,
+      "xp": 33525,
       "level": 9,
       "balance": 0,
       "bank": 0,
@@ -2245,17 +2245,17 @@
           "2026-08-10": 9,
           "2026-08-12": 32,
           "2026-08-13": 76,
-          "2026-08-15": 42
+          "2026-08-15": 58
         },
         "weekly": {
           "2026-07-27": 33,
           "2026-08-03": 8,
-          "2026-08-10": 159
+          "2026-08-10": 175
         },
         "monthly": {
-          "2026-08": 200
+          "2026-08": 216
         },
-        "total": 200
+        "total": 216
       },
       "1278713831345881170": {
         "daily": {
@@ -2267,17 +2267,17 @@
           "2026-08-07": 255,
           "2026-08-08": 275,
           "2026-08-09": 71,
-          "2026-08-15": 43
+          "2026-08-15": 49
         },
         "weekly": {
           "2026-07-27": 131,
           "2026-08-03": 1092,
-          "2026-08-10": 43
+          "2026-08-10": 49
         },
         "monthly": {
-          "2026-08": 1266
+          "2026-08": 1272
         },
-        "total": 1266
+        "total": 1272
       },
       "1408853277470097568": {
         "daily": {
@@ -2661,12 +2661,12 @@
     }
   },
   "lastSeen": {
-    "1278713831345881170": 1786754347729,
+    "1278713831345881170": 1786798240250,
     "1408853277470097568": 1786226128256,
     "1371931756692897893": 1786238783533,
     "820324513488699404": 1786048518357,
     "1534648427135369226": 1786220285276,
-    "1410668779347771402": 1786791966336
+    "1410668779347771402": 1786798187971
   },
   "antinuke": {
     "enabled": true,
@@ -2769,7 +2769,8 @@
           "channels",
           "invites",
           "emojis",
-          "voice"
+          "voice",
+          "antinuke"
         ],
         "colors": {}
       }
@@ -2838,7 +2839,7 @@
     "stripstaff": 4,
     "bt": 1,
     "help": 26,
-    "levels": 5,
+    "levels": 7,
     "ask": 10,
     "who": 1,
     "ttt": 1,
@@ -2865,12 +2866,12 @@
     "volume": 16,
     "fastforward": 2,
     "tts": 1,
-    "purge": 3,
+    "purge": 9,
     "customize": 6,
     "ce": 4,
     "ec": 4,
     "quotwe": 1,
-    "quote": 2,
+    "quote": 4,
     "casino": 1,
     "eco": 1,
     "lock": 1,
@@ -2888,7 +2889,7 @@
     "musicstats": 2,
     "level": 4,
     "leveling": 2,
-    "log": 9,
+    "log": 12,
     "stop": 2,
     "welcome": 8,
     "goodbye": 1,
@@ -2896,8 +2897,9 @@
     "repeat": 1,
     "gw": 1,
     "pin": 1,
-    "logs": 1,
-    "logging": 1
+    "logs": 2,
+    "logging": 2,
+    "sticker": 3
   },
   "economy": {
     "enabled": true,
@@ -2978,7 +2980,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 73,
+          "messagesSent": 79,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3014,12 +3016,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": "word",
-          "lastTime": 1786754330769,
+          "lastContent": ",quote",
+          "lastTime": 1786798240251,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786754330769
+          "windowStart": 1786798240251
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 250,
@@ -3094,7 +3096,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 138,
+          "messagesSent": 152,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3131,12 +3133,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",help",
-          "lastTime": 1786791966342,
-          "messageCount": 1,
+          "lastContent": ",log",
+          "lastTime": 1786798187972,
+          "messageCount": 2,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786791966342
+          "windowStart": 1786798183963
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 180,
