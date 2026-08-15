@@ -1201,7 +1201,7 @@
   },
   "users": {
     "1410668779347771402": {
-      "xp": 21248,
+      "xp": 23231,
       "level": 8,
       "balance": 0,
       "bank": 0,
@@ -1213,7 +1213,7 @@
       "lastCrime": null
     },
     "1278713831345881170": {
-      "xp": 33784,
+      "xp": 33890,
       "level": 9,
       "balance": 0,
       "bank": 0,
@@ -2245,17 +2245,17 @@
           "2026-08-10": 9,
           "2026-08-12": 32,
           "2026-08-13": 76,
-          "2026-08-15": 83
+          "2026-08-15": 134
         },
         "weekly": {
           "2026-07-27": 33,
           "2026-08-03": 8,
-          "2026-08-10": 200
+          "2026-08-10": 251
         },
         "monthly": {
-          "2026-08": 241
+          "2026-08": 292
         },
-        "total": 241
+        "total": 292
       },
       "1278713831345881170": {
         "daily": {
@@ -2267,17 +2267,17 @@
           "2026-08-07": 255,
           "2026-08-08": 275,
           "2026-08-09": 71,
-          "2026-08-15": 52
+          "2026-08-15": 53
         },
         "weekly": {
           "2026-07-27": 131,
           "2026-08-03": 1092,
-          "2026-08-10": 52
+          "2026-08-10": 53
         },
         "monthly": {
-          "2026-08": 1275
+          "2026-08": 1276
         },
-        "total": 1275
+        "total": 1276
       },
       "1408853277470097568": {
         "daily": {
@@ -2365,21 +2365,21 @@
   "vcStats": {
     "1528875292016251040": {
       "1410668779347771402": {
-        "totalMs": 37771864,
+        "totalMs": 49103450,
         "daily": {
           "2026-08-01": 509810,
           "2026-08-04": 1505,
           "2026-08-09": 2039968,
           "2026-08-13": 1618913,
-          "2026-08-15": 33601668
+          "2026-08-15": 44933254
         },
         "weekly": {
           "2026-07-27": 509810,
           "2026-08-03": 2041473,
-          "2026-08-10": 35220581
+          "2026-08-10": 46552167
         },
         "monthly": {
-          "2026-08": 37771864
+          "2026-08": 49103450
         },
         "streamMs": 2073033,
         "cameraMs": 151316,
@@ -2390,10 +2390,10 @@
         "cameraDaily": {
           "2026-08-01": 151316
         },
-        "lastJoin": null,
+        "lastJoin": 1786821098759,
         "lastStreamJoin": null,
         "lastCameraJoin": null,
-        "inVc": false,
+        "inVc": true,
         "streaming": false,
         "cameraOn": false
       },
@@ -2661,12 +2661,12 @@
     }
   },
   "lastSeen": {
-    "1278713831345881170": 1786806142131,
+    "1278713831345881170": 1786810667057,
     "1408853277470097568": 1786226128256,
     "1371931756692897893": 1786238783533,
     "820324513488699404": 1786048518357,
     "1534648427135369226": 1786220285276,
-    "1410668779347771402": 1786806226388
+    "1410668779347771402": 1786821144518
   },
   "antinuke": {
     "enabled": true,
@@ -2826,11 +2826,22 @@
     "members": [],
     "channels": []
   },
-  "autoresponders": {},
+  "autoresponders": {
+    "hey": {
+      "response": "hi {user.mention}",
+      "include": false,
+      "reply": false,
+      "rolesAdd": [],
+      "rolesRemove": [],
+      "exclusiveRoles": [],
+      "exclusiveChannels": [],
+      "createdAt": 1786807406669
+    }
+  },
   "commandUsage": {
     "ping": 14,
     "antiraid": 1,
-    "autoresponder": 21,
+    "autoresponder": 23,
     "role": 31,
     "antinuke": 9,
     "settings": 2,
@@ -2838,7 +2849,7 @@
     "strip": 2,
     "stripstaff": 4,
     "bt": 1,
-    "help": 27,
+    "help": 28,
     "levels": 7,
     "ask": 10,
     "who": 1,
@@ -2850,10 +2861,10 @@
     "economy": 4,
     "profile": 1,
     "messages": 1,
-    "voicetime": 1,
+    "voicetime": 3,
     "nuke": 7,
     "botstats": 2,
-    "play": 27,
+    "play": 28,
     "pause": 8,
     "disconnect": 9,
     "unpause": 2,
@@ -2866,10 +2877,10 @@
     "volume": 16,
     "fastforward": 2,
     "tts": 1,
-    "purge": 12,
-    "customize": 9,
-    "ce": 4,
-    "ec": 4,
+    "purge": 13,
+    "customize": 26,
+    "ce": 6,
+    "ec": 5,
     "quotwe": 1,
     "quote": 4,
     "casino": 1,
@@ -2877,11 +2888,11 @@
     "lock": 1,
     "unlock": 1,
     "ticket": 1,
-    "starboard": 1,
+    "starboard": 3,
     "work": 2,
     "gamble": 2,
     "cups": 3,
-    "vc": 2,
+    "vc": 16,
     "music": 20,
     "membercount": 1,
     "roleinfo": 1,
@@ -2901,7 +2912,10 @@
     "logging": 2,
     "sticker": 3,
     "servercustomize": 6,
-    "sc": 1
+    "sc": 1,
+    "reaction": 2,
+    "clownboard": 1,
+    "discord": 2
   },
   "economy": {
     "enabled": true,
@@ -2982,7 +2996,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 82,
+          "messagesSent": 83,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3018,12 +3032,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",servercustomize view",
-          "lastTime": 1786806142155,
+          "lastContent": ",vc",
+          "lastTime": 1786810667063,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786806142155
+          "windowStart": 1786810667063
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 250,
@@ -3098,7 +3112,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 168,
+          "messagesSent": 204,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3135,12 +3149,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",servercustomize avatar https://cdn.discordapp.com/attachments/1528875294952521975/1538201359210254467/Cyriane_on_TikTok.jpg?ex=6a81d126&is=6a807fa6&hm=3f4b713fc3436a53862ae84cf9a3ad03d9d6a621b9871191372a6a49082cb2b6&",
-          "lastTime": 1786806226389,
+          "lastContent": ",customize banner",
+          "lastTime": 1786821144520,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786806226389
+          "windowStart": 1786821144520
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 180,
@@ -3257,5 +3271,39 @@
     "enabled": false,
     "channelId": null,
     "unpin": false
+  },
+  "starboardConfig": {
+    "channelId": null,
+    "emoji": "⭐",
+    "threshold": 3,
+    "color": "#FFD700",
+    "selfStar": false,
+    "jumpUrl": true,
+    "timestamp": true,
+    "attachments": true,
+    "locked": false,
+    "ignored": {
+      "channels": [],
+      "members": [],
+      "roles": []
+    },
+    "messages": {}
+  },
+  "clownboardConfig": {
+    "channelId": null,
+    "emoji": "🤡",
+    "threshold": 3,
+    "color": "#FF6B35",
+    "selfStar": false,
+    "jumpUrl": true,
+    "timestamp": true,
+    "attachments": true,
+    "locked": false,
+    "ignored": {
+      "channels": [],
+      "members": [],
+      "roles": []
+    },
+    "messages": {}
   }
 }

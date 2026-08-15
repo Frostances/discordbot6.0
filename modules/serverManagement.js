@@ -13,6 +13,7 @@ const {
 } = require('discord.js');
 const { getGuildDb, getUserDb } = require('./database');
 const { COLORS, base } = require('../utils/embeds');
+const { parseEmbedCode, buildWelcomeVars, buildChannelVars } = require('../utils/embedParser');
 
 // ══════════════════════════════════════════════════════════
 // HELPERS
@@ -115,8 +116,8 @@ async function sendAutoresponderGuide(ctx) {
       .setTitle(item.name)
       .setDescription(item.description)
       .addFields(
-        { name: 'Aliases', value: `\`${item.aliases}\``, inline: true },
-        { name: 'Parameters', value: `\`${item.parameters}\``, inline: true },
+        { name: 'Aliases', value: `\`\`\`${item.aliases}\`\`\``, inline: true },
+        { name: 'Parameters', value: `\`\`\`${item.parameters}\`\`\``, inline: true },
         { name: 'Usage', value: `\`\`\`\n${item.usage}\n\`\`\`` },
       )
       .setFooter({ text: `Page ${page + 1}/${AUTORESPONDER_GUIDE.length}` });
@@ -301,13 +302,84 @@ async function handleAutoresponder(ctx, args) {
 
   if (sub === 'variables') {
     return replyEmbed(ctx, infoEmbed('Autoresponder Variables',
-      '`{user}` — mention the user\n' +
-      '`{user.name}` — user\'s username\n' +
-      '`{user.id}` — user\'s ID\n' +
-      '`{channel}` — mention the channel\n' +
-      '`{guild}` — server name\n' +
+      '**User Variables:**\n' +
+      '`{user}` — username\n' +
+      '`{user.mention}` — mention the user\n' +
+      '`{user.name}` / `{user.username}` — username\n' +
+      '`{user.id}` — user ID\n' +
+      '`{user.tag}` — discriminator\n' +
+      '`{user.display_name}` — display name\n' +
+      '`{user.avatar}` — avatar URL\n' +
+      '`{user.guild_avatar}` — guild avatar URL\n' +
+      '`{user.display_avatar}` — display avatar URL\n' +
+      '`{user.join_position}` — join position\n' +
+      '`{user.join_position_suffix}` — join position with suffix (1st, 2nd, etc.)\n' +
+      '`{user.boost}` — boosting? Yes/No\n' +
+      '`{user.boost_since}` — boost since date\n' +
+      '`{user.boost_since_timestamp}` — boost since unix timestamp\n' +
+      '`{user.color}` — top role hex color\n' +
+      '`{user.top_role}` — top role mention\n' +
+      '`{user.role_list}` — role mentions list\n' +
+      '`{user.role_text_list}` — role names list\n' +
+      '`{user.bot}` — bot? Yes/No\n' +
+      '`{user.created_at}` — account creation date\n' +
+      '`{user.created_at_timestamp}` — account creation unix timestamp\n' +
+      '`{user.joined_at}` — server join date\n' +
+      '`{user.joined_at_timestamp}` — server join unix timestamp\n\n' +
+      '**Channel Variables:**\n' +
+      '`{channel}` / `{channel.mention}` — mention the channel\n' +
+      '`{channel.name}` — channel name\n' +
+      '`{channel.id}` — channel ID\n' +
+      '`{channel.topic}` — channel topic\n' +
+      '`{channel.type}` — channel type\n' +
+      '`{channel.category_id}` — parent category ID\n' +
+      '`{channel.category_name}` — parent category name\n' +
+      '`{channel.position}` — channel position\n' +
+      '`{channel.slowmode_delay}` — slowmode seconds\n\n' +
+      '**Guild Variables:**\n' +
+      '`{guild}` / `{guild.name}` — server name\n' +
       '`{guild.id}` — server ID\n' +
-      '`{time}` — current time'
+      '`{guild.count}` / `{guild.members}` — member count\n' +
+      '`{guild.shard}` — shard ID\n' +
+      '`{guild.owner_id}` — owner ID\n' +
+      '`{guild.created_at}` — server creation date\n' +
+      '`{guild.created_at_timestamp}` — server creation unix timestamp\n' +
+      '`{guild.emoji_count}` — emoji count\n' +
+      '`{guild.role_count}` / `{guild.roles_count}` — role count\n' +
+      '`{guild.boost_count}` — boost count\n' +
+      '`{guild.boost_tier}` — boost tier\n' +
+      '`{guild.preferred_locale}` — preferred locale\n' +
+      '`{guild.key_features}` — server features\n' +
+      '`{guild.icon}` — icon URL\n' +
+      '`{guild.banner}` — banner URL\n' +
+      '`{guild.splash}` — splash URL\n' +
+      '`{guild.discovery}` — discovery splash URL\n' +
+      '`{guild.vanity}` — vanity URL\n' +
+      '`{guild.max_presences}` — max presences\n' +
+      '`{guild.max_members}` — max members\n' +
+      '`{guild.max_video_channel_users}` — max video users\n' +
+      '`{guild.afk_timeout}` — AFK timeout\n' +
+      '`{guild.afk_channel}` — AFK channel mention\n' +
+      '`{guild.channels_count}` — total channels\n' +
+      '`{guild.text_channels_count}` — text channels\n' +
+      '`{guild.voice_channels_count}` — voice channels\n' +
+      '`{guild.category_channels_count}` — category channels\n\n' +
+      '**Date & Time Variables:**\n' +
+      '`{date.now}` — current date (PST)\n' +
+      '`{date.now_proper}` — current date/time (PST)\n' +
+      '`{date.now_short}` — short date (PST)\n' +
+      '`{date.utc_now}` — UTC date/time\n' +
+      '`{date.utc_now_proper}` — UTC proper\n' +
+      '`{date.utc_now_short}` — short UTC date\n' +
+      '`{date.utc_timestamp}` — unix timestamp\n' +
+      '`{time.now}` — current time (PST 12h)\n' +
+      '`{time.now_military}` — current time (PST 24h)\n' +
+      '`{time.utc_now}` — UTC time (12h)\n' +
+      '`{time.utc_now_military}` — UTC time (24h)\n\n' +
+      '**Embed Coding:**\n' +
+      'You can use full embed codes in responses!\n' +
+      '`{embed}$v{title: Hello}$v{description: World}$v{color: 5865F2}`\n' +
+      'Supports: title, description, color, thumbnail, image, footer, author, fields, buttons, url, timestamp'
     ));
   }
 
@@ -414,19 +486,37 @@ async function processAutoresponder(message) {
         }
       }
     }
-    // Send response with variables
-    let response = data.response
-      .replace(/{user}/g, `<@${message.author.id}>`)
-      .replace(/{user\.name}/g, message.author.username)
-      .replace(/{user\.id}/g, message.author.id)
-      .replace(/{channel}/g, `<#${message.channel.id}>`)
-      .replace(/{guild}/g, message.guild.name)
-      .replace(/{guild\.id}/g, message.guild.id)
-      .replace(/{time}/g, new Date().toLocaleString());
+
+    // Build full variable set using the embed parser's variable builders
+    const welcomeVars = buildWelcomeVars(message.member);
+    const channelVars = buildChannelVars(message.channel);
+    const vars = { ...welcomeVars, ...channelVars };
+
+    // Parse the response through the embed parser
+    // This handles both plain text and full embed codes
+    const { content: parsedContent, embeds, components } = parseEmbedCode(data.response, vars, message.guild);
+
+    const payload = {};
+    if (parsedContent) payload.content = parsedContent;
+    if (embeds?.length) payload.embeds = embeds;
+    if (components?.length) payload.components = components;
+
+    // If nothing parsed, fallback to raw response with basic var substitution
+    if (!payload.content && !payload.embeds?.length) {
+      payload.content = data.response
+        .replace(/{user}/g, `<@${message.author.id}>`)
+        .replace(/{user\.name}/g, message.author.username)
+        .replace(/{user\.id}/g, message.author.id)
+        .replace(/{channel}/g, `<#${message.channel.id}>`)
+        .replace(/{guild}/g, message.guild.name)
+        .replace(/{guild\.id}/g, message.guild.id)
+        .replace(/{time}/g, new Date().toLocaleString());
+    }
+
     if (data.reply) {
-      await message.reply(response).catch(() => {});
+      await message.reply(payload).catch(() => {});
     } else {
-      await message.channel.send(response).catch(() => {});
+      await message.channel.send(payload).catch(() => {});
     }
   }
 }
@@ -519,7 +609,7 @@ async function handlePagination(ctx, args) {
     if (sub === 'update') {
       const id = parseInt(args[2]);
       const code = args.slice(3).join(' ');
-      if (isNaN(id) || !code) return replyEmbed(ctx, errorEmbed('Missing Arguments', 'Usage: `pagination update <message_link> <id> <embed_code>`'));
+      if (isNaN(id) || !code) return replyEmbed(ctx, errorEmbed('Missing Arguments', 'Usage: `pagination update <link> <id> <embed_code>`'));
       if (!pag[msg.id]) return replyEmbed(ctx, errorEmbed('Not Found', 'No pagination on that message.'));
       if (id < 1 || id > pag[msg.id].pages.length) return replyEmbed(ctx, errorEmbed('Invalid ID', 'Page number out of range.'));
       try {
@@ -945,7 +1035,7 @@ async function handleFirstmessage(ctx, args) {
     const first = messages.first();
     if (!first) return replyEmbed(ctx, errorEmbed('Not Found', 'Could not find the first message.'));
     return replyEmbed(ctx, infoEmbed('First Message',
-      `**Author:** ${first.author.tag}\n**Sent:** <t:${Math.floor(first.createdTimestamp / 1000)}:F>\n**Link:** [Jump](${first.url})`
+      `**Author:** ${first.author.tag}\n**Sent:** <t:${Math.floor(first.createdTimestamp/1000)}:F>\n**Link:** [Jump](${first.url})`
     ));
   } catch (err) {
     return replyEmbed(ctx, errorEmbed('Failed', err.message));
@@ -968,9 +1058,9 @@ async function handlePins(ctx, args) {
   if (!sub) {
     return replyEmbed(ctx, infoEmbed('Pins System',
       '`pins config` — view config\n' +
-      '`pins set <on/off>` — enable/disable\n' +
+      '`pins set <on|off>` — enable/disable\n' +
       '`pins channel <#channel>` — set archive channel\n' +
-      '`pins unpin <on/off>` — toggle unpinning after archive\n' +
+      '`pins unpin <on|off>` — toggle unpinning after archive\n' +
       '`pins archive` — archive current channel pins\n' +
       '`pins reset` — reset config'
     ));
