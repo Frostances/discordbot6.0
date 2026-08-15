@@ -271,22 +271,42 @@ async function handleQuote(ctx, args) {
   let targetMsg = null;
   const input = args[0] || '';
   const linkMatch = input.match(/discord\.com\/channels\/(\d+)\/(\d+)\/(\d+)/);
+
   try {
-    if (linkMatch) {
+    // 1. FIRST: Check if this message is a reply to another message
+    const msg = ctx.message || ctx;
+    if (msg?.reference?.messageId) {
+      targetMsg = await msg.channel.messages.fetch(msg.reference.messageId).catch(() => null);
+    }
+
+    // 2. Message link
+    if (!targetMsg && linkMatch) {
       const [, , channelId, messageId] = linkMatch;
       const ch = await ctx.client.channels.fetch(channelId).catch(() => null);
       if (ch) targetMsg = await ch.messages.fetch(messageId).catch(() => null);
-    } else if (/^\d+$/.test(input)) {
+    }
+
+    // 3. Message ID
+    if (!targetMsg && /^\d+$/.test(input)) {
       targetMsg = await ctx.channel.messages.fetch(input).catch(() => null);
-    } else {
-      const messages = await ctx.channel.messages.fetch({ limit: 10 });
+    }
+
+    // 4. Mention or latest message in channel
+    if (!targetMsg) {
+      const messages = await ctx.channel.messages.fetch({ limit: 15 });
       const mention = isInteraction ? null : ctx.mentions?.users?.first();
-      if (mention) targetMsg = messages.find(m => m.author.id === mention.id && !m.author.bot);
-      if (!targetMsg) targetMsg = messages.find(m => !m.author.bot && m.id !== ctx.id);
+      if (mention) {
+        targetMsg = messages.find(m => m.author.id === mention.id && !m.author.bot && m.id !== ctx.id && m.id !== ctx.message?.id);
+      }
+      if (!targetMsg) {
+        // Find the most recent non-bot message that isn't the command itself
+        targetMsg = messages.find(m => !m.author.bot && m.id !== ctx.id && m.id !== ctx.message?.id);
+      }
     }
   } catch {}
+
   if (!targetMsg) return replyEmbed(ctx, base(COLORS.error).setTitle('❌ Message Not Found')
-    .setDescription('Provide a message link, message ID, or mention a user.\nUsage: `,quote <message-link>`'));
+    .setDescription('Reply to a message, provide a message link/ID, or let me quote the latest message.\nUsage: `,quote [message-link|id]`'));
 
   // Try to generate image with Canvas
   try {

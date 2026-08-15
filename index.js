@@ -73,8 +73,8 @@ function isGuildWhitelisted(guildId) {
 const { getGuildDb, getUserDb }                          = require('./modules/database');
 const { getSetting: getLegacySetting }                   = require('./modules/settings');
 const { handleConfigCommand, getSetting }                = require('./modules/config');
-const { isAdmin, isBotOwner, isStaffOrAdmin,
-        checkRestriction }                               = require('./modules/helpers');
+const { isAdmin, isBotOwner, isStaffOrAdmin, hasDiscordPerm,
+ checkRestriction }                               = require('./modules/helpers');
 const { handleBoosterRoleCommand,
         handleBoostRemoved,
         handleBoosterShareButton }                       = require('./modules/boosterRole');
@@ -1430,30 +1430,30 @@ client.on('messageCreate', async (message) => {
         if (command === 'level' || command === 'levels') return handleLevelsCommand(message, args, client);
 
         if (command === 'setxp') {
-            if (!isStaffOrAdmin(message.member)) return message.reply('❌ No permission.');
+            if (!message.member.permissions.has(PermissionFlagsBits.ManageGuild)) return message.reply('❌ You need the **Manage Server** permission.');
             const target = message.mentions.members.first();
-            const amount = parseInt(args[0]);
-            if (!target || isNaN(amount)) return message.reply('❌ Usage: `.setxp @user <amount>`');
+            const amount = parseInt(args.find(a => /^\d+$/.test(a)));
+            if (!target || isNaN(amount)) return message.reply('❌ Usage: `,setxp @user <amount>`');
             const udb = getUserDb(message.guild.id, target.id);
             udb.data.xp = Math.max(0, amount); udb.save();
             return message.reply(`✅ Set **${target.user.username}**'s XP to **${amount}**.`);
         }
 
         if (command === 'removexp') {
-            if (!isStaffOrAdmin(message.member)) return message.reply('❌ No permission.');
+            if (!message.member.permissions.has(PermissionFlagsBits.ManageGuild)) return message.reply('❌ You need the **Manage Server** permission.');
             const target = message.mentions.members.first();
-            const amount = parseInt(args[0]);
-            if (!target || isNaN(amount)) return message.reply('❌ Usage: `.removexp @user <amount>`');
+            const amount = parseInt(args.find(a => /^\d+$/.test(a)));
+            if (!target || isNaN(amount)) return message.reply('❌ Usage: `,removexp @user <amount>`');
             const udb = getUserDb(message.guild.id, target.id);
             udb.data.xp = Math.max(0, (udb.data.xp || 0) - amount); udb.save();
             return message.reply(`✅ Removed **${amount}** XP from **${target.user.username}**.`);
         }
 
         if (command === 'setlevel') {
-            if (!isStaffOrAdmin(message.member)) return message.reply('❌ No permission.');
+            if (!message.member.permissions.has(PermissionFlagsBits.ManageGuild)) return message.reply('❌ You need the **Manage Server** permission.');
             const target = message.mentions.members.first();
-            const level  = parseInt(args[0]);
-            if (!target || isNaN(level)) return message.reply('❌ Usage: `.setlevel @user <level>`');
+            const level  = parseInt(args.find(a => /^\d+$/.test(a)));
+            if (!target || isNaN(level)) return message.reply('❌ Usage: `,setlevel @user <level>`');
             const udb = getUserDb(message.guild.id, target.id);
             let xp = 0; for (let i = 0; i < level; i++) xp += 100 * Math.pow(i + 1, 2);
             udb.data.xp = xp; udb.data.level = level; udb.save();

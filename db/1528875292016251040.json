@@ -1201,7 +1201,7 @@
   },
   "users": {
     "1410668779347771402": {
-      "xp": 18789,
+      "xp": 20083,
       "level": 7,
       "balance": 0,
       "bank": 0,
@@ -1213,7 +1213,7 @@
       "lastCrime": null
     },
     "1278713831345881170": {
-      "xp": 32926,
+      "xp": 33327,
       "level": 9,
       "balance": 0,
       "bank": 0,
@@ -2244,17 +2244,18 @@
           "2026-08-09": 8,
           "2026-08-10": 9,
           "2026-08-12": 32,
-          "2026-08-13": 76
+          "2026-08-13": 76,
+          "2026-08-15": 42
         },
         "weekly": {
           "2026-07-27": 33,
           "2026-08-03": 8,
-          "2026-08-10": 117
+          "2026-08-10": 159
         },
         "monthly": {
-          "2026-08": 158
+          "2026-08": 200
         },
-        "total": 158
+        "total": 200
       },
       "1278713831345881170": {
         "daily": {
@@ -2265,16 +2266,18 @@
           "2026-08-06": 177,
           "2026-08-07": 255,
           "2026-08-08": 275,
-          "2026-08-09": 71
+          "2026-08-09": 71,
+          "2026-08-15": 43
         },
         "weekly": {
           "2026-07-27": 131,
-          "2026-08-03": 1092
+          "2026-08-03": 1092,
+          "2026-08-10": 43
         },
         "monthly": {
-          "2026-08": 1223
+          "2026-08": 1266
         },
-        "total": 1223
+        "total": 1266
       },
       "1408853277470097568": {
         "daily": {
@@ -2362,20 +2365,21 @@
   "vcStats": {
     "1528875292016251040": {
       "1410668779347771402": {
-        "totalMs": 4170196,
+        "totalMs": 37771864,
         "daily": {
           "2026-08-01": 509810,
           "2026-08-04": 1505,
           "2026-08-09": 2039968,
-          "2026-08-13": 1618913
+          "2026-08-13": 1618913,
+          "2026-08-15": 33601668
         },
         "weekly": {
           "2026-07-27": 509810,
           "2026-08-03": 2041473,
-          "2026-08-10": 1618913
+          "2026-08-10": 35220581
         },
         "monthly": {
-          "2026-08": 4170196
+          "2026-08": 37771864
         },
         "streamMs": 2073033,
         "cameraMs": 151316,
@@ -2657,12 +2661,12 @@
     }
   },
   "lastSeen": {
-    "1278713831345881170": 1786238803883,
+    "1278713831345881170": 1786754347729,
     "1408853277470097568": 1786226128256,
     "1371931756692897893": 1786238783533,
     "820324513488699404": 1786048518357,
     "1534648427135369226": 1786220285276,
-    "1410668779347771402": 1786581932544
+    "1410668779347771402": 1786791966336
   },
   "antinuke": {
     "enabled": true,
@@ -2827,14 +2831,14 @@
     "antiraid": 1,
     "autoresponder": 21,
     "role": 31,
-    "antinuke": 8,
-    "settings": 1,
+    "antinuke": 9,
+    "settings": 2,
     "staff": 1,
     "strip": 2,
     "stripstaff": 4,
     "bt": 1,
-    "help": 20,
-    "levels": 2,
+    "help": 26,
+    "levels": 5,
     "ask": 10,
     "who": 1,
     "ttt": 1,
@@ -2848,17 +2852,17 @@
     "voicetime": 1,
     "nuke": 7,
     "botstats": 1,
-    "play": 24,
-    "pause": 7,
+    "play": 27,
+    "pause": 8,
     "disconnect": 9,
     "unpause": 2,
     "mines": 5,
-    "resume": 4,
+    "resume": 5,
     "preset": 3,
     "skip": 4,
     "ttschannel": 4,
     "queue": 3,
-    "volume": 14,
+    "volume": 16,
     "fastforward": 2,
     "tts": 1,
     "purge": 3,
@@ -2881,7 +2885,19 @@
     "membercount": 1,
     "roleinfo": 1,
     "mute": 1,
-    "musicstats": 1
+    "musicstats": 2,
+    "level": 4,
+    "leveling": 2,
+    "log": 9,
+    "stop": 2,
+    "welcome": 8,
+    "goodbye": 1,
+    "filter": 1,
+    "repeat": 1,
+    "gw": 1,
+    "pin": 1,
+    "logs": 1,
+    "logging": 1
   },
   "economy": {
     "enabled": true,
@@ -2962,7 +2978,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 63,
+          "messagesSent": 73,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -2998,12 +3014,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",purge 3",
-          "lastTime": 1786238803885,
-          "messageCount": 2,
+          "lastContent": "word",
+          "lastTime": 1786754330769,
+          "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786238796312
+          "windowStart": 1786754330769
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 250,
@@ -3078,7 +3094,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 98,
+          "messagesSent": 138,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3116,11 +3132,11 @@
         ],
         "messageTracker": {
           "lastContent": ",help",
-          "lastTime": 1786581932560,
+          "lastTime": 1786791966342,
           "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786581932560
+          "windowStart": 1786791966342
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 180,
@@ -3232,5 +3248,10 @@
       }
     ],
     "activeEvents": {}
+  },
+  "pinsConfig": {
+    "enabled": false,
+    "channelId": null,
+    "unpin": false
   }
 }

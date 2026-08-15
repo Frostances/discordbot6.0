@@ -526,26 +526,39 @@ async function handleSticker(message, args) {
   }
 
   if (sub === 'add') {
-    if (!message.member.permissions.has(PermissionFlagsBits.ManageExpressions))
-      return message.reply({ embeds: [error('Permission Denied', 'You need **Manage Expressions**.')] });
+      if (!message.member.permissions.has(PermissionFlagsBits.ManageExpressions))
+        return message.reply({ embeds: [error('Permission Denied', 'You need **Manage Expressions**.')] });
 
-    const url = args[1];
-    const name = args[2];
-    if (!url || !name) return message.reply({ embeds: [error('Missing Args', 'Usage: `,sticker add <url> <name>`')] });
-    if (name.length < 2 || name.length > 30) return message.reply({ embeds: [error('Invalid Name', 'Sticker name must be 2–30 characters.')] });
+      let url = args[1];
+      let name = args[2];
 
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
-      if (!res.ok) throw new Error('Failed to download');
-      const buf = Buffer.from(await res.arrayBuffer());
-      const sticker = await guild.stickers.create({ file: buf, name, tags: 'discord' });
-      return message.reply({ embeds: [success('Sticker Added', `Added **${sticker.name}**`)] });
-    } catch (err) {
-      return message.reply({ embeds: [error('Failed', err.message)] });
+      // Check if replying to a message with stickers
+      if (message.reference?.messageId) {
+        try {
+          const refMsg = await message.channel.messages.fetch(message.reference.messageId);
+          if (refMsg.stickers?.size > 0) {
+            const sticker = refMsg.stickers.first();
+            url = sticker.url;
+            // Use provided name or fall back to sticker name
+            name = name || sticker.name;
+          }
+        } catch {}
+      }
+
+      if (!url || !name) return message.reply({ embeds: [error('Missing Args', 'Usage: `,sticker add <url> <name>` or reply to a sticker with `,sticker add <name>`')] });
+      if (name.length < 2 || name.length > 30) return message.reply({ embeds: [error('Invalid Name', 'Sticker name must be 2–30 characters.')] });
+
+      try {
+        const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+        if (!res.ok) throw new Error('Failed to download');
+        const buf = Buffer.from(await res.arrayBuffer());
+        const sticker = await guild.stickers.create({ file: buf, name, tags: 'discord' });
+        return message.reply({ embeds: [success('Sticker Added', `Added **${sticker.name}**`)] });
+      } catch (err) {
+        return message.reply({ embeds: [error('Failed', err.message)] });
+      }
     }
-  }
-
-  if (sub === 'remove') {
+if (sub === 'remove') {
     if (!message.member.permissions.has(PermissionFlagsBits.ManageExpressions))
       return message.reply({ embeds: [error('Permission Denied', 'You need **Manage Expressions**.')] });
 
