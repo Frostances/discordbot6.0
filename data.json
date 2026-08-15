@@ -707,7 +707,7 @@
     "1530445696795283506": {
       "guesswordWins": 0,
       "swearCount": 5,
-      "vcTotalMinutes": 0,
+      "vcTotalMinutes": 28,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -771,7 +771,7 @@
     "1505994919368720434": {
       "guesswordWins": 0,
       "swearCount": 4,
-      "vcTotalMinutes": 0,
+      "vcTotalMinutes": 33,
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
@@ -823,6 +823,14 @@
       "warnings": [],
       "streakCount": 1,
       "lastStreakDate": "2026-08-15"
+    },
+    "715026416588030115": {
+      "guesswordWins": 0,
+      "swearCount": 0,
+      "vcTotalMinutes": 0,
+      "warnings": [],
+      "streakCount": 1,
+      "lastStreakDate": "2026-08-15"
     }
   },
   "persistentData": {
@@ -844,9 +852,9 @@
       "944016826751389717": 1786788603864,
       "411916947773587456": 1786797112669,
       "1533229547296784391": 1786791808708,
-      "1505994919368720434": 1786796310826,
-      "1530445696795283506": 1786796595114,
-      "1251828648969895949": 1786797086473
+      "1251828648969895949": 1786797086473,
+      "745116273981259888": 1786799594999,
+      "1007616729255522394": 1786799906103
     },
     "staffRoles": [],
     "voiceMaster": {},

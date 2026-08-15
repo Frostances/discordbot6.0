@@ -23,10 +23,34 @@ const activeTimers = new Map();
 function getAuthorId(ctx) { return ctx.author?.id || ctx.user?.id; }
 
 // ══════════════════════════════════════════════════════════
-//  CORE: clone-delete the channel (preserves all settings)
+//  HELPER: Deep replace channel ID in database object
+// ══════════════════════════════════════════════════════════
+function deepReplaceChannelId(obj, oldId, newId) {
+    if (typeof obj === 'string') {
+        return obj === oldId ? newId : obj;
+    }
+    if (Array.isArray(obj)) {
+        return obj.map(v => deepReplaceChannelId(v, oldId, newId));
+    }
+    if (obj && typeof obj === 'object') {
+        const result = {};
+        for (const [key, value] of Object.entries(obj)) {
+            // Replace key if it IS the old channel ID (for objects keyed by channel ID)
+            const newKey = key === oldId ? newId : key;
+            result[newKey] = deepReplaceChannelId(value, oldId, newId);
+        }
+        return result;
+    }
+    return obj;
+}
+
+// ══════════════════════════════════════════════════════════
+//  CORE: clone-delete the channel (preserves all settings + DB config)
 // ══════════════════════════════════════════════════════════
 async function executeNuke(channel, executorId, reason = 'Channel nuked') {
     const guild = channel.guild;
+    const oldChannelId = channel.id;
+
     try {
         const clone = await guild.channels.create({
             name:               channel.name,
@@ -40,6 +64,18 @@ async function executeNuke(channel, executorId, reason = 'Channel nuked') {
             reason: `Nuke by ${executorId}: ${reason}`,
         });
 
+        // ── Migrate all database references from old channel to new channel ──
+        const db = getGuildDb(guild.id);
+        const originalData = JSON.stringify(db.data);
+        const migratedData = deepReplaceChannelId(db.data, oldChannelId, clone.id);
+        db.data = migratedData;
+        db._save();
+
+        const changed = JSON.stringify(originalData) !== JSON.stringify(migratedData);
+        if (changed) {
+            logger.info('NUKE', `Migrated database configs from #${channel.name} (${oldChannelId}) to #${clone.name} (${clone.id})`);
+        }
+
         await channel.delete(`Nuke: ${reason}`);
 
         createCase(guild.id, { type: 'nuke', targetId: clone.id, executorId, reason });
@@ -49,6 +85,7 @@ async function executeNuke(channel, executorId, reason = 'Channel nuked') {
                 { name: 'Channel', value: `#${clone.name}`,  inline: true },
                 { name: 'By',      value: `<@${executorId}>`, inline: true },
                 { name: 'Reason',  value: reason },
+                { name: 'Config',  value: changed ? '✅ Migrated to new channel' : 'ℹ️ No DB refs found', inline: true },
             ));
 
         return clone;
@@ -164,7 +201,7 @@ async function handleNuke(ctx, args, client) {
         const durStr   = args[1];
         const duration = parseDuration(durStr);
         if (!duration) return ctx.reply({
-            content: '❌ Usage: `.nuke schedule <time> [#channel] [reason]`\nTime: `10m` `1h` `2d`',
+            content: '❌ Usage: `,nuke schedule <time> [#channel] [reason]`\nTime: `10m` `1h` `2d`',
             ephemeral: true,
         });
 
@@ -192,14 +229,13 @@ async function handleNuke(ctx, args, client) {
     if (!ch.permissionsFor(guild.members.me)?.has(PermissionFlagsBits.ManageChannels))
         return ctx.reply({ content: `❌ I don't have **Manage Channels** permission in <#${ch.id}>.`, ephemeral: true });
 
-    // Nuking is destructive, so ask for an explicit confirmation instead of
-    // silently delaying and then deleting the channel.
+    // Nuking is destructive, so ask for an explicit confirmation
     let confirmation;
     try {
         confirmation = await ctx.channel.send({
             embeds: [base(COLORS.error)
                 .setTitle('💣 Confirm Channel Nuke')
-                .setDescription(`This will delete and recreate <#${ch.id}> and remove all messages.${reason !== 'No reason provided' ? `\n\n**Reason:** ${reason}` : ''}\n\nThis cannot be undone.`)],
+                .setDescription(`This will delete and recreate <#${ch.id}> and remove all messages.${reason !== 'No reason provided' ? `\n\n**Reason:** ${reason}` : ''}\n\nAll channel settings (welcome, goodbye, boosts, logs, etc.) will be preserved.\n\nThis cannot be undone.`)],
             components: [new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
                     .setCustomId(`nuke_confirm_${ctx.id || Date.now()}`)
@@ -246,7 +282,6 @@ async function handleNuke(ctx, args, client) {
             const clone = await executeNuke(ch, authorId, reason);
             await clone.send('first').catch(() => {});
         } catch (err) {
-            // The original channel may be gone, so report failures elsewhere.
             try { await ctx.channel?.send(`❌ Nuke failed: ${err.message}`); } catch {}
         }
     });

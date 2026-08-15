@@ -1,4 +1,5 @@
 // Load .env only when running locally; Replit injects secrets as real env vars
+require('./modules/mobileStatus');
 try { require('dotenv').config(); } catch {} // Replit doesn't need dotenv
 const {
     Client, GatewayIntentBits, EmbedBuilder,
@@ -328,9 +329,12 @@ const client = new Client({
         GatewayIntentBits.GuildEmojisAndStickers,
     ],
     ws: {
-        // Makes the bot appear online on mobile (Discord Android)
-        identifyProperties: { browser: 'Discord Android', device: 'Discord Android', os: 'android'},
-    },
+      properties: {
+        os: 'ios',
+        browser: 'Discord iOS',
+        device: 'Discord iOS'
+      }
+    }
 });
 
 attachGlobalHandlers(client);

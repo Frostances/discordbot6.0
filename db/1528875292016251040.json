@@ -1201,8 +1201,8 @@
   },
   "users": {
     "1410668779347771402": {
-      "xp": 20330,
-      "level": 7,
+      "xp": 20538,
+      "level": 8,
       "balance": 0,
       "bank": 0,
       "warnings": [],
@@ -2245,17 +2245,17 @@
           "2026-08-10": 9,
           "2026-08-12": 32,
           "2026-08-13": 76,
-          "2026-08-15": 58
+          "2026-08-15": 65
         },
         "weekly": {
           "2026-07-27": 33,
           "2026-08-03": 8,
-          "2026-08-10": 175
+          "2026-08-10": 182
         },
         "monthly": {
-          "2026-08": 216
+          "2026-08": 223
         },
-        "total": 216
+        "total": 223
       },
       "1278713831345881170": {
         "daily": {
@@ -2666,7 +2666,7 @@
     "1371931756692897893": 1786238783533,
     "820324513488699404": 1786048518357,
     "1534648427135369226": 1786220285276,
-    "1410668779347771402": 1786798187971
+    "1410668779347771402": 1786800026158
   },
   "antinuke": {
     "enabled": true,
@@ -2852,7 +2852,7 @@
     "messages": 1,
     "voicetime": 1,
     "nuke": 7,
-    "botstats": 1,
+    "botstats": 2,
     "play": 27,
     "pause": 8,
     "disconnect": 9,
@@ -2866,7 +2866,7 @@
     "volume": 16,
     "fastforward": 2,
     "tts": 1,
-    "purge": 9,
+    "purge": 12,
     "customize": 6,
     "ce": 4,
     "ec": 4,
@@ -3096,7 +3096,7 @@
           "gamesPlayed": 1,
           "gamesWon": 0,
           "shopPurchases": 0,
-          "messagesSent": 152,
+          "messagesSent": 157,
           "commandsUsed": 0
         },
         "cooldowns": {
@@ -3133,12 +3133,12 @@
           }
         ],
         "messageTracker": {
-          "lastContent": ",log",
-          "lastTime": 1786798187972,
-          "messageCount": 2,
+          "lastContent": ",botstats",
+          "lastTime": 1786800026166,
+          "messageCount": 1,
           "commandCount": 0,
           "spamCount": 0,
-          "windowStart": 1786798183963
+          "windowStart": 1786800026166
         },
         "suspiciousFlags": 0,
         "_dailyEarned": 180,
